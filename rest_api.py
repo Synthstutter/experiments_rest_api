@@ -1,22 +1,28 @@
 from flask import Flask,jsonify,request
-from flask.ext.sqlalchemy import SQLAlchemy
+import flask.ext.sqlalchemy
+import flask.ext.restless
 
-app= Flask("__none__")
+app = flask.Flask(__name__)
+app.config['DEBUG'] = True
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///experiments.db'
+db = flask.ext.sqlalchemy.SQLAlchemy(app)
 
-app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///bee_experiments.db'
+class Circ(db.Model):
+    id= db.Column(db.Integer, primary_key=True)
+    sensor= db.Column(db.Integer, nullable=False)
+    datetime= db.Column(db.DateTime, nullable=False)
 
-db=SQLAlchemy(app)
 
-from models import *
+class Beeboxes(db.Model):
+    id= db.Column(db.Integer, primary_key=True)
+    box= db.Column(db.Integer, nullable=False)
+    correct= db.Column(db.Boolean, nullable=False)
+    datetime= db.Column(db.DateTime, nullable=False)
 
-@app.route('/', methods=['GET'])
-def home():
-    posts=db.session.query(ShbBeeCircadian).all()
-    return jsonify({"posts": posts[0]})
+db.create_all()
 
-@app.route('/', methods=['POST'])
-def upload_db():
-    
+manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
+manager.create_api(Circ, methods= ['GET', 'POST', 'DELETE'])    
+manager.create_api(Beeboxes, methods= ['GET', 'POST', 'DELETE'])    
 
-if __name__== "__main__":
-    app.run()
+app.run()
