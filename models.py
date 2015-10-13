@@ -1,16 +1,16 @@
-from rest_api import db
+import rest_api
 
-class Circ(db.Model):
-    id= db.Column(db.Integer, primary_key=True)
-    sensor= db.Column(db.Integer, nullable=False)
-    datetime= db.Column(db.DateTime, nullable=False)
+class Circ(rest_api.db.Model):
+    id= rest_api.db.Column(rest_api.db.Integer, primary_key=True)
+    sensor= rest_api.db.Column(rest_api.db.Integer, nullable=False)
+    datetime= rest_api.db.Column(rest_api.db.DateTime, nullable=False)
 
 
-class Beeboxes(db.Model):
-    id= db.Column(db.Integer, primary_key=True)
-    box= db.Column(db.Integer, nullable=False)
-    correct= db.Column(db.Boolean, nullable=False)
-    datetime= db.Column(db.DateTime, nullable=False)
+class Beeboxes(rest_api.db.Model):
+    id= rest_api.db.Column(rest_api.db.Integer, primary_key=True)
+    box= rest_api.db.Column(rest_api.db.Integer, nullable=False)
+    correct= rest_api.db.Column(rest_api.db.Boolean, nullable=False)
+    datetime= rest_api.db.Column(rest_api.db.DateTime, nullable=False)
 
 
     
