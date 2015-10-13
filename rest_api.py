@@ -12,14 +12,14 @@ db.drop_all()
 class Circ(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     sensor= db.Column(db.Integer, nullable=False)
-    datetime= db.Column(db.DateTime, nullable=True)
+    # datetime= db.Column(db.DateTime, nullable=True)
 
 
 class Beeboxes(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     box= db.Column(db.Integer, nullable=False)
     correct= db.Column(db.Boolean, nullable=False)
-    datetime= db.Column(db.DateTime, nullable=True)
+    # datetime= db.Column(db.DateTime, nullable=True)
     
 db.create_all()
 
