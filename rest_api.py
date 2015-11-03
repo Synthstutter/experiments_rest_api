@@ -27,7 +27,7 @@ class Beeboxes(db.Model):
 db.create_all()
 
 manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
-manager.create_api(Circ, methods= ['GET', 'POST', 'DELETE'])    
-manager.create_api(Beeboxes, methods= ['GET', 'POST', 'DELETE'])    
+manager.create_api(Circ, methods= ['GET', 'POST', 'DELETE'], results_per_page=None)    
+manager.create_api(Beeboxes, methods= ['GET', 'POST', 'DELETE'], results_per_page=None)    
 
 app.run()
